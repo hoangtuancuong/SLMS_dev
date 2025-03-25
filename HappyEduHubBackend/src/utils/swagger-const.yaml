@@ -1,0 +1,1142 @@
+components:
+    securitySchemes:
+        Token:
+            type: http
+            scheme: bearer
+            bearerFormat: JWT
+    schemas:
+        Meta:
+            name: Meta
+            type: object
+            properties:
+                limit:
+                    type: integer
+                    description: Số lượng phần tử trả về
+                offset:
+                    type: integer
+                    description: Số lượng phần tử bỏ qua
+                total:
+                    type: integer
+                    description: Tổng số lượng phần tử
+        Blog:
+            name: Blog
+            type: object
+            properties:
+                id:
+                    type: integer
+                    description: Id của blog
+                title:
+                    type: string
+                    description: Tiêu đề của blog
+                content:
+                    type: string
+                    description: Nội dung của blog
+                thumbnail_url:
+                    nullable: true
+                    type: string
+                    description: Url của hình ảnh thumbnail của blog
+                is_approved:
+                    type: boolean
+                    description: Trạng thái duyệt của blog
+                createdAt:
+                    type: string
+                    format: date-time
+                    description: Ngày tạo blog
+                updatedAt:
+                    type: string
+                    format: date-time
+                    description: Ngày cập nhật blog
+                type:
+                    type: string
+                    description: Loại của blog
+                    enum: [POST, DOCUMENT]
+                author:
+                    $ref: "#/components/schemas/Author"
+        BlogInput:
+            name: BlogInput
+            type: object
+            properties:
+                title:
+                    type: string
+                    description: Tiêu đề của blog
+                content:
+                    type: string
+                    description: Nội dung của blog
+                thumbnail_url:
+                    nullable: true
+                    type: string
+                    description: Url của hình ảnh thumbnail của blog
+                type:
+                    type: string
+                    description: Loại của blog
+                    enum: [POST, DOCUMENT]
+        User:
+            name: User
+            type: object
+            properties:
+                id:
+                    type: integer
+                    description: Id của người dùng
+                name:
+                    type: string
+                    description: Tên của người dùng
+                email:
+                    type: string
+                    description: Email của người dùng
+                role:
+                    type: string
+                    description: Quyền của người dùng
+                phone_number:
+                    type: string
+                    description: Số điện thoại của người dùng
+                gender:
+                    type: string
+                    description: Giới tính của người dùng
+                    enum: [MALE, FEMALE, OTHER]
+                address:
+                    type: string
+                    description: Địa chỉ của người dùng
+                created_at:
+                    type: string
+                    format: date-time
+                    description: Ngày tạo người dùng
+                updated_at:
+                    type: string
+                    format: date-time
+                    description: Ngày cập nhật người dùng
+        UserInput:
+            name: UserInput
+            type: object
+            properties:
+                name:
+                    type: string
+                    description: Tên của người dùng
+                email:
+                    type: string
+                    description: Email của người dùng
+                password:
+                    type: string
+                    description: Mật khẩu của người dùng
+                phone_number:
+                    type: string
+                    nullable: true
+                    description: Số điện thoại của người dùng
+                date_of_birth:
+                    type: string
+                    description: Sinh nhật của người dùng
+                gender:
+                    type: string
+                    description: Giới tính của người dùng
+                    enum: [MALE, FEMALE, OTHER]
+                address:
+                    type: string
+                    description: Địa chỉ của người dùng
+        UserAdminInput:
+            name: UserAdminInput
+            type: object
+            properties:
+                name:
+                    type: string
+                    description: Tên của người dùng
+                email:
+                    type: string
+                    description: Email của người dùng
+                password:
+                    type: string
+                    description: Mật khẩu của người dùng
+                phone_number:
+                    type: string
+                    nullable: true
+                    description: Số điện thoại của người dùng
+                date_of_birth:
+                    type: string
+                    description: Sinh nhật của người dùng
+                role:
+                    type: string
+                    description: Vai trò của người dùng
+                    enum: [TEACHER, ACADEMIC_AFFAIR, ADMIN, STUDENT]
+                avatar_url:
+                    type: string
+                    nullable: true
+                    description: Url avatar của người dùng
+                is_thaiphien:
+                    type: boolean
+                    description: Trạng thái thái phiên của người dùng
+                    default: false
+                gender:
+                    type: string
+                    description: Giới tính của người dùng
+                    enum: [MALE, FEMALE, OTHER]
+                address:
+                    type: string
+                    description: Địa chỉ của người dùng
+                subject_id:
+                    type: number
+                    description: Id của môn học (chỉ áp dụng cho giáo viên, không có trong trường hợp khác)
+                portfolio:
+                    type: string
+                    description: Portfolio của người dùng (chỉ áp dụng cho giáo viên)
+        UserUpdateInput:
+            name: UserUpdateInput
+            type: object
+            properties:
+                name:
+                    type: string
+                    description: Tên của người dùng
+                email:
+                    type: string
+                    description: Email của người dùng
+                phone_number:
+                    type: string
+                    nullable: true
+                    description: Số điện thoại của người dùng
+                date_of_birth:
+                    type: string
+                    description: Sinh nhật của người dùng
+                role:
+                    type: string
+                    description: Vai trò của người dùng
+                    enum: [TEACHER, ACADEMIC_AFFAIR, ADMIN, STUDENT]
+                avatar_url:
+                    type: string
+                    description: Url avatar của người dùng
+                is_thaiphien:
+                    type: boolean
+                    description: Trạng thái thái phiên của người dùng
+                gender:
+                    type: string
+                    description: Giới tính của người dùng
+                    enum: [MALE, FEMALE, OTHER]
+                address:
+                    type: string
+                    description: Địa chỉ của người dùng
+                subject_id:
+                    type: number
+                    description: Id của môn học (chỉ áp dụng cho giáo viên, không có trong trường hợp khác)
+                portfolio:
+                    type: string
+                    description: Portfolio của người dùng (chỉ áp dụng cho giáo viên)
+        Author:
+            name: Author
+            type: object
+            properties:
+                id:
+                    type: integer
+                    description: Id của chủ nội dung
+                name:
+                    type: string
+                    description: Tên của chủ nội dung
+                role:
+                    type: string
+                    description: Quyền của chủ nội dung
+                avatar_url:
+                    type: string
+                    description: Url avatar của chủ nội dung
+        ChangePasswordInput:
+            name: ChangePasswordInput
+            type: object
+            properties:
+                old_password:
+                    type: string
+                    description: Mật khẩu của người dùng
+                password:
+                    type: string
+                    description: Mật khẩu mới của người dùng
+                confirm_password:
+                    type: string
+                    description: Mật khẩu mới của người dùng
+        LoginInput:
+            name: LoginInput
+            type: object
+            properties:
+                email:
+                    type: string
+                    description: Email của người dùng
+                password:
+                    type: string
+                    description: Mật khẩu của người dùng
+        LoginOutput:
+            name: LoginOutput
+            type: object
+            properties:
+                token:
+                    type: string
+                    description: Token của người dùng
+                data:
+                    Type: object
+                    description: Data của người dùng
+        Tag:
+            name: Tag
+            type: object
+            properties:
+                id:
+                    type: integer
+                    description: Id của tag
+                name:
+                    type: string
+                    description: Tên của tag
+                type:
+                    type: string
+                    description: Loại của tag
+                note:
+                    type: string
+                    description: Ghi chú của tag
+                code_fragment:
+                    type: string
+                    description: Mã code của tag
+                created_at:
+                    type: string
+                    format: date-time
+                    description: Ngày tạo tag
+                updated_at:
+                    type: string
+                    format: date-time
+                    description: Ngày cập nhật tag
+        TagInput:
+            name: TagInput
+            type: object
+            properties:
+                name:
+                    type: string
+                    description: Tên của tag
+                type:
+                    type: string
+                    description: Loại của tag
+                code_fragment:
+                    type: string
+                    description: Mã code của tag
+                note:
+                    type: string
+                    description: Ghi chú của tag
+        Exam:
+            name: Exam
+            type: object
+            properties:
+                id:
+                    type: number
+                    description: Id bài test
+                drive_url:
+                    type: string
+                    description: Đường dẫn drive url bài test
+                key:
+                    type: string
+                    description: Chuỗi đáp án của bài test
+                is_private:
+                    type: boolean
+                    description: Bài test ẩn cho duy nhất người tạo xem hay public
+                name:
+                    type: string
+                    description: Tiêu đề bài test
+                teahcer_id:
+                    type: number
+                    description: Mã giáo viên tạo bài test
+                created_at:
+                    type: string
+                    format: date-time
+                    description: Ngày tạo exam
+                updated_at:
+                    type: string
+                    format: date-time
+                    description: Ngày cập nhật exam
+                exam_type:
+                    type: string
+                    description: Loại bài test
+                    enum: [ENTRY_EXAM, ASSIGNMENT]
+        ExamInput:
+            name: ExamInput
+            type: object
+            properties:
+                drive_url:
+                    type: string
+                    description: Đường dẫn drive url bài test
+                key:
+                    type: string
+                    description: Chuỗi đáp án của bài test
+                is_private:
+                    type: boolean
+                    description: Bài test ẩn cho duy nhất người tạo xem hay public
+                name:
+                    type: string
+                    description: Tiêu đề bài test
+                exam_type:
+                    type: string
+                    description: Loại bài test
+                    enum: [ENTRY_EXAM, ASSIGNMENT]
+        Award:
+            name: Award
+            type: object
+            properties:
+                id:
+                    type: number
+                    description: Id của thành tựu
+                user:
+                    $ref: "#/components/schemas/Author"
+                time:
+                    type: string
+                    format: date-time
+                    description: Ngày đạt thành tựu
+                description:
+                    type: string
+                    description: Ghi chú thành tựu
+                image:
+                    type: string
+                    description: Hình ảnh thành tựu
+                type:
+                    type: string
+                    description: Loại thành tựu
+                created_at:
+                    type: string
+                    format: date-time
+                    description: Ngày tạo thành tựu
+                updated_at:
+                    type: string
+                    format: date-time
+                    description: Ngày cập nhật thành tựu
+        AwardInput:
+            name: AwardInput
+            type: object
+            properties:
+                user_id:
+                    type: number
+                    description: Id của người dùng
+                time:
+                    type: string
+                    format: date-time
+                    description: Ngày đạt thành tựu
+                description:
+                    type: string
+                    description: Ghi chú thành tựu
+                image:
+                    type: string
+                    description: Hình ảnh thành tựu
+                type:
+                    type: string
+                    description: Loại thành tựu
+        Course:
+            name: Course
+            type: object
+            properties:
+                id:
+                    type: number
+                    description: Id của khóa học
+                name:
+                    type: string
+                    description: Tên của khóa học
+                start_date:
+                    type: string
+                    format: date-time
+                    description: Ngày bắt đầu khóa học
+                end_date:
+                    type: string
+                    format: date-time
+                    description: Ngày kết thúc khóa học
+                fee:
+                    type: number
+                    description: Học phí của khóa học
+                shifts:
+                    type: array
+                    items:
+                        $ref: "#/components/schemas/CourseShift"
+                    description: Ca học của khóa học
+                tags:
+                    type: array
+                    items:
+                        $ref: "#/components/schemas/Tag"
+                teacher:
+                    $ref: "#/components/schemas/Author"
+                is_approved:
+                    type: boolean
+                    description: Trạng thái duyệt khóa học
+                is_private:
+                    type: boolean
+                    description: Trạng thái riêng tư khóa học
+                is_generated:
+                    type: boolean
+                    description: Trạng thái tự động tạo khóa học
+                code:
+                    type: string
+                    description: Mã code của khóa học
+                created_at:
+                    type: string
+                    format: date-time
+                    description: Ngày tạo khóa học
+                updated_at:
+                    type: string
+                    format: date-time
+                    description: Ngày cập nhật khóa học
+        CourseShift:
+            name: CourseShift
+            type: object
+            properties:
+                id:
+                    type: number
+                    description: Id của ca của khóa học
+                course_id:
+                    type: number
+                    description: Id của khóa học
+                day:
+                    type: number
+                    description: Ngày trong tuần
+                shift:
+                    type: number
+                    description: Ca trong ngày
+                room:
+                    type: string
+                    nullable: true
+                    description: Phòng học
+        CourseInput:
+            name: CourseInput
+            type: object
+            properties:
+                name:
+                    type: string
+                    description: Tên của khóa học
+                description:
+                    type: string
+                    description: Mô tả của khóa học
+                start_date:
+                    type: string
+                    format: date-time
+                    description: Ngày bắt đầu khóa học
+                end_date:
+                    type: string
+                    format: date-time
+                    description: Ngày kết thúc khóa học
+                fee:
+                    type: number
+                    description: Học phí của khóa học
+                is_private:
+                    type: boolean
+                    description: Trạng thái riêng tư khóa học
+                tag_ids:
+                    type: array
+                    items:
+                        type: number
+                    description: Id các tag của khóa học
+                course_shifts:
+                    type: array
+                    items:
+                        $ref: "#/components/schemas/CourseShiftInput"
+                    description: Ca học của khóa học
+        CourseUpdateInput:
+            name: CourseInput
+            type: object
+            properties:
+                name:
+                    type: string
+                    description: Tên của khóa học
+                description:
+                    type: string
+                    description: Mô tả của khóa học
+                start_date:
+                    type: string
+                    format: date-time
+                    description: Ngày bắt đầu khóa học
+                end_date:
+                    type: string
+                    format: date-time
+                    description: Ngày kết thúc khóa học
+                is_approved:
+                    type: boolean
+                    description: Trạng thái duyệt khóa học
+                fee:
+                    type: number
+                    description: Học phí của khóa học
+                is_private:
+                    type: boolean
+                    description: Trạng thái riêng tư khóa học
+                tag_ids:
+                    type: array
+                    items:
+                        type: number
+                    description: Id các tag của khóa học
+                course_shifts:
+                    type: array
+                    items:
+                        $ref: "#/components/schemas/CourseShiftInput"
+                    description: Ca học của khóa học
+        CourseShiftInput:
+            name: CourseShiftInput
+            type: object
+            properties:
+                day:
+                    type: number
+                    description: Ngày trong tuần
+                shift:
+                    type: number
+                    description: Ca trong ngày
+                room:
+                    type: string
+                    description: Phòng học (chỉ có admin mới được phép dùng trường này)
+        ReviewInput:
+            name: ReviewInput
+            type: object
+            properties:
+                teacher_id:
+                    type: number
+                    description: Id giáo viên
+                rate:
+                    type: number
+                    description: Điểm đánh giá
+                description:
+                    type: string
+                    description: Nội dung đánh giá
+        ReviewUpdateInput:
+            name: ReviewUpdateInput
+            type: object
+            properties:
+                rate:
+                    type: number
+                    description: Điểm đánh giá
+                description:
+                    type: string
+                    description: Nội dung đánh giá
+        Review:
+            name: Review
+            type: object
+            properties:
+                id:
+                    type: number
+                    description: Id bài review
+                teacher_id:
+                    type: number
+                    description: Id giáo viên
+                rate:
+                    type: number
+                    description: Điểm đánh giá
+                description:
+                    type: boolean
+                    description: Nội dung đánh giá
+                created_at:
+                    type: string
+                    format: date-time
+                    description: Ngày tạo review
+                updated_at:
+                    type: string
+                    format: date-time
+                    description: Ngày cập nhật review
+        AdditionalStudentData:
+            name: AdditionalStudentData
+            type: object
+            properties:
+                user_id:
+                    type: number
+                    description: Mã người dùng
+                first_contact_name:
+                    type: string
+                    description: Tên người giám hộ 1
+                first_contact_tel:
+                    type: string
+                    description: Số người giám hộ 1
+                second_contact_name:
+                    type: string
+                    description: Tên người giám hộ 2
+                second_contact_tel:
+                    type: string
+                    description: Số người giám hộ 2
+                cccd:
+                    type: string
+                    description: CCCD
+                class:
+                    type: string
+                    description: Lớp
+                school:
+                    type: string
+                    description: Trường
+        AdditionalStudentDataInput:
+            name: AdditionalStudentDataInput
+            type: object
+            properties:
+                first_contact_name:
+                    type: string
+                    description: Tên người giám hộ 1
+                first_contact_tel:
+                    type: string
+                    description: Số người giám hộ 1
+                second_contact_name:
+                    type: string
+                    description: Tên người giám hộ 2
+                second_contact_tel:
+                    type: string
+                    description: Số người giám hộ 2
+                cccd:
+                    type: string
+                    description: CCCD
+                class:
+                    type: string
+                    description: Lớp
+                school:
+                    type: string
+                    description: Trường
+        CourseMember:
+            name: CourseMember
+            type: object
+            properties:
+                id:
+                    type: number
+                    description: Id của thành viên
+                user:
+                    nullable: true
+                    $ref: "#/components/schemas/User"
+                course:
+                    nullable: true
+                    $ref: "#/components/schemas/Course"
+                status:
+                    type: string
+                    enum: [PENDING, APPROVED, REJECTED]
+                    description: Trạng thái của thành viên
+                created_at:
+                    type: string
+                    format: date-time
+                    description: Ngày tạo thành viên
+                updated_at:
+                    type: string
+                    format: date-time
+                    description: Ngày cập nhật thành viên
+        CourseMemberInput:
+            name: CourseMemberInput
+            type: object
+            properties:
+                course_id:
+                    type: number
+                    description: Id của khóa học
+                user_id:
+                    type: number
+                    description: Id của người dùng
+                status:
+                    type: string
+                    enum: [PENDING, APPROVED, REJECTED]
+                    description: Trạng thái của thành viên
+        Assignment:
+            name: Assignment
+            type: object
+            properties:
+                id:
+                    type: number
+                    description: Id của bài tập
+                course_id:
+                    type: number
+                    description: Id của khóa học
+                exam_id:
+                    type: number
+                    description: Id của bài test
+                name:
+                    type: string
+                    description: Tên của bài tập
+                start_time:
+                    type: string
+                    format: date-time
+                    description: Thời gian bắt đầu của bài tập
+                end_time:
+                    type: string
+                    format: date-time
+                    description: Thời gian kết thúc của bài tập
+                created_at:
+                    type: string
+                    format: date-time
+                    description: Ngày tạo bài tập
+                updated_at:
+                    type: string
+                    format: date-time
+                    description: Ngày cập nhật bài tập
+                assignment_type:
+                    type: string
+                    description: Loại bài tập
+                    enum: [EXCERCISE, TEST]
+                exam:
+                    $ref: "#/components/schemas/Exam"
+        CourseLesson:
+            name: CourseLesson
+            type: object
+            properties:
+                id:
+                    type: number
+                    description: Id của tiết học
+                course_id:
+                    type: number
+                    description: Id của khóa học
+                shift:
+                    type: number
+                    description: Ca trong ngày
+                take_place_at:
+                    type: string
+                    format: date-time
+                    description: Ngày giờ tiết học
+                room:
+                    type: string
+                    description: Phòng học
+                note:
+                    type: string
+                    description: Ghi chú tiết học
+                status:
+                    type: array
+                    items:
+                        type: string
+                        enum: [NORMAL, DATE_ALTERED, SHIFT_ALTERED, ROOM_ALTERED, CANCELLED]
+                    description: Trạng thái tiết học
+                created_at:
+                    type: string
+                    format: date-time
+                    description: Ngày tạo tiết học
+                updated_at:
+                    type: string
+                    format: date-time
+                    description: Ngày cập nhật tiết học
+        CourseLessonInput:
+            name: CourseLessonInput
+            type: object
+            properties:
+                shift:
+                    type: number
+                    description: Ca trong ngày
+                take_place_at:
+                    type: string
+                    format: date-time
+                    description: Ngày giờ tiết học
+                room:
+                    type: string
+                    description: Phòng học
+                note:
+                    type: string
+                    description: Ghi chú tiết học
+                is_uncancel:
+                    type: boolean
+                    description: Nếu true sẽ khiến tiết học không bị hủy nữa
+        AssignmentInput:
+            name: AssignmentInput
+            type: object
+            properties:
+                course_id:
+                    type: number
+                    description: Id của khóa học
+                exam_id:
+                    type: number
+                    description: Id của bài test
+                name:
+                    type: string
+                    description: Tên của bài tập
+                start_time:
+                    type: string
+                    format: date-time
+                    description: Thời gian bắt đầu của bài tập
+                end_time:
+                    type: string
+                    format: date-time
+                    description: Thời gian kết thúc của bài tập
+                assignment_type:
+                    type: string
+                    description: Loại bài tập
+                    enum: [EXCERCISE, TEST]
+        RollCallInput:
+            name: RollCallInput
+            type: object
+            properties:
+                lesson_id:
+                    type: number
+                    description: Id của tiết học
+                user_id:
+                    type: number
+                    description: Id của người dùng
+                status:
+                    type: string
+                    description: Trạng thái điểm danh
+                    enum: [ABSENT, LATE, PERMITTED_ABSENT]
+                note:
+                    type: string
+                    description: Ghi chú điểm danh
+        RollCall:
+            name: RollCall
+            type: object
+            properties:
+                id:
+                    type: number
+                    description: Id của điểm danh
+                lesson_id:
+                    type: number
+                    description: Id của tiết học
+                user_id:
+                    type: number
+                    description: Id của người dùng
+                status:
+                    type: string
+                    description: Trạng thái điểm danh
+                    enum: [ABSENT, LATE, PERMITTED_ABSENT]
+                note:
+                    type: string
+                    description: Ghi chú điểm danh
+                created_at:
+                    type: string
+                    format: date-time
+                    description: Ngày tạo điểm danh
+                updated_at:
+                    type: string
+                    format: date-time
+        EntryMember:
+            name: EntryExamMember
+            type: object
+            properties:
+                id:
+                    type: number
+                    description: Id của thành viên
+                user:
+                    $ref: "#/components/schemas/User"
+                exam:
+                    $ref: "#/components/schemas/Exam"
+                score:
+                    type: number
+                    description: Điểm của thành viên
+                note:
+                    type: string
+                    description: Ghi chú điểm của thành viên
+                created_at:
+                    type: string
+                    format: date-time
+                    description: Ngày tạo thành viên
+                updated_at:
+                    type: string
+                    format: date-time
+                    description: Ngày cập nhật thành viên
+        EntryMemberInput:
+            name: EntryExamMemberInput
+            type: object
+            properties:
+                exam_id:
+                    type: number
+                    description: Id của bài test
+                user_id:
+                    type: number
+                    description: Id của người dùng
+        DriveFileMetadata:
+            name: DriveFileMetadata
+            type: object
+            properties:
+                id:
+                    type: number
+                    description: Id của file
+                file_id:
+                    type: string
+                    description: Id của file trên Google Drive
+                name:
+                    type: string
+                    description: Tên của file
+                size:
+                    type: number
+                    description: Kích thước của file
+                type:
+                    type: string
+                    description: Loại file
+                web_view_link:
+                    type: string
+                    description: Link xem file trên Google Drive
+                web_content_link:
+                    type: string
+                    description: Link tải file trên Google Drive
+                created_at:
+                    type: string
+                    format: date-time
+                    description: Ngày tạo file
+                updated_at:
+                    type: string
+                    format: date-time
+                    description: Ngày cập nhật file
+        Receipt:
+            name: Receipt
+            type: object
+            properties:
+                id:
+                    type: number
+                    description: Id của khoản thu
+                course:
+                    $ref: "#/components/schemas/Course"
+                name:
+                    type: string
+                    description: Tên của khoản thu
+                amount:
+                    type: number
+                    description: Số tiền của khoản thu
+                deadline:
+                    type: string
+                    format: date-time
+                    description: Ngày hạn của khoản thu
+                document_url:
+                    type: string
+                    description: Đường dẫn tài liệu của khoản thu
+                note:
+                    type: string
+                    description: Ghi chú của khoản thu
+                created_at:
+                    type: string
+                    format: date-time
+                    description: Ngày tạo khoản thu
+                updated_at:
+                    type: string
+                    format: date-time
+                    description: Ngày cập nhật khoản thu
+        ReceiptInput:
+            name: ReceiptInput
+            type: object
+            properties:
+                course_id:
+                    type: number
+                    description: Id của khóa học
+                name:
+                    type: string
+                    description: Tên của khoản thu
+                amount:
+                    type: number
+                    description: Số tiền của khoản thu
+                deadline:
+                    type: string
+                    format: date-time
+                    description: Ngày hạn của khoản thu
+                document_url:
+                    type: string
+                    description: Đường dẫn tài liệu của khoản thu
+                note:
+                    type: string
+                    description: Ghi chú của khoản thu
+        ReceiptUpdateInput:
+            name: ReceiptUpdateInput
+            type: object
+            properties:
+                name:
+                    type: string
+                    description: Tên của khoản thu
+                amount:
+                    type: number
+                    description: Số tiền của khoản thu
+                deadline:
+                    type: string
+                    format: date-time
+                    description: Ngày hạn của khoản thu
+                document_url:
+                    type: string
+                    description: Đường dẫn tài liệu của khoản thu
+                note:
+                    type: string
+                    description: Ghi chú của khoản thu
+        Transaction:
+            name: Transaction
+            type: object
+            properties:
+                id:
+                    type: number
+                    description: Id của giao dịch
+                receipt:
+                    $ref: "#/components/schemas/Receipt"
+                user:
+                    $ref: "#/components/schemas/User"
+                transaction_code:
+                    type: string
+                    description: Mã giao dịch
+                payment_method:
+                    type: string
+                    description: Phương thức thanh toán
+                amount:
+                    type: number
+                    description: Số tiền giao dịch
+                status:
+                    type: string
+                    description: Trạng thái giao dịch
+                raw_response_from_gateway:
+                    type: string
+                    description: Dữ liệu gốc từ gateway
+                note:
+                    type: string
+                    description: Ghi chú giao dịch
+                paid_at:
+                    type: string
+                    format: date-time
+                    description: Ngày thanh toán
+                refunded_at:
+                    type: string
+                    format: date-time
+                    description: Ngày hoàn trả
+                created_at:
+                    type: string
+                    format: date-time
+                    description: Ngày tạo giao dịch
+                updated_at:
+                    type: string
+                    format: date-time
+                    description: Ngày cập nhật giao dịch
+        TransactionInput:
+            name: TransactionInput
+            type: object
+            properties:
+                receipt_id:
+                    type: number
+                    description: Id của khoản thu
+                user_id:
+                    type: number
+                    description: Id của người dùng
+                transaction_code:
+                    type: string
+                    description: Mã giao dịch
+                payment_method:
+                    type: string
+                    description: Phương thức thanh toán
+                amount:
+                    type: number
+                    description: Số tiền giao dịch
+                status:
+                    type: string
+                    description: Trạng thái giao dịch
+                raw_response_from_gateway:
+                    type: string
+                    description: Dữ liệu gốc từ gateway
+                note:
+                    type: string
+                    description: Ghi chú giao dịch
+                paid_at:
+                    type: string
+                    format: date-time
+                    description: Ngày thanh toán
+                refunded_at:
+                    type: string
+                    format: date-time
+                    description: Ngày hoàn trả
+        TransactionUpdateInput:
+            name: TransactionUpdateInput
+            type: object
+            properties:
+                transaction_code:
+                    type: string
+                    description: Mã giao dịch
+                payment_method:
+                    type: string
+                    description: Phương thức thanh toán
+                amount:
+                    type: number
+                    description: Số tiền giao dịch
+                status:
+                    type: string
+                    description: Trạng thái giao dịch
+                raw_response_from_gateway:
+                    type: string
+                    description: Dữ liệu gốc từ gateway
+                note:
+                    type: string
+                    description: Ghi chú giao dịch
+                paid_at:
+                    type: string
+                    format: date-time
+                    description: Ngày thanh toán
+                refunded_at:
+                    type: string
+                    format: date-time
+                    description: Ngày hoàn trả
+        ApiError:
+            name: ApiError
+            type: object
+            properties:
+                message:
+                    type: string
+                type:
+                    type: string
+        Message:
+            name: Message
+            type: object
+            properties:
+                message:
+                    type: string

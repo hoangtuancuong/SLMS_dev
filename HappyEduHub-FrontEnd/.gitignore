@@ -1,0 +1,27 @@
+# Node.js dependencies
+/node_modules
+
+# Next.js build và output
+/.next/
+/out/
+
+# Logs
+*.log
+
+# IDE và hệ thống
+.vscode/
+.DS_Store
+
+# Local environment files
+.env*
+!.env.example
+
+# Vercel-specific files
+.vercel
+
+# Package manager lockfiles (chỉ giữ lại pnpm-lock.yaml)
+package-lock.json
+yarn.lock
+
+# Miscellaneous
+*.pem

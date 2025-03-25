@@ -1,0 +1,10 @@
+node_modules
+package-lock.json
+.env
+
+# Google Drive credentials
+service-account.json
+
+# VNPay credentials
+vnpay.json
+
