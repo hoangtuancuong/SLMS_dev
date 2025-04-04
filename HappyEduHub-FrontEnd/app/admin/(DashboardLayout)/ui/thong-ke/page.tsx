@@ -6,6 +6,7 @@ import SalesProfit from '@/app/admin/dashboard/SalesProfit';
 import TotalFollowers from '@/app/admin/dashboard/TotalFollowers';
 import TotalIncome from '@/app/admin/dashboard/TotalIncome';
 import PopularProducts from '../table/page';
+import CourseList from '../course/CourseList';
 
 const page = () => {
   return (
@@ -24,14 +25,8 @@ const page = () => {
             </div>
           </div>
         </div>
-        <div className="lg:col-span-8 col-span-12">
-          <PopularProducts />
-        </div>
-        <div className="lg:col-span-4 col-span-12">
-          <EarningReports />
-        </div>
         <div className="col-span-12">
-          <BlogCards />
+          <CourseList />
         </div>
         <div className="col-span-12 text-center">
           <p className="text-base">

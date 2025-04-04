@@ -117,7 +117,7 @@ const CourseMember = (props: any) => {
         <Table>
           <Table.Head className="sticky top-0 z-10 bg-white">
             <Table.HeadCell className="p-4 w-12">
-              {role === RoleType.ACADEMIC_AFFAIR && (
+              {(role === RoleType.ACADEMIC_AFFAIR || role === RoleType.ADMIN) && (
                 <Checkbox
                   checked={isAllSelected}
                   indeterminate={isIndeterminate}
@@ -143,7 +143,7 @@ const CourseMember = (props: any) => {
             {members?.map((member, index) => (
               <Table.Row key={member?.id}>
                 <Table.Cell className="px-4 py-2 w-12">
-                  {role === RoleType.ACADEMIC_AFFAIR && (
+                  {(role === RoleType.ACADEMIC_AFFAIR || role === RoleType.ADMIN) && (
                     <Checkbox
                       checked={selectedMembers.has(member?.id)}
                       onChange={() => handleCheckboxChange(member?.id)}

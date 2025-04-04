@@ -107,7 +107,7 @@ const AddAssignmentModal = (props: any) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Modal show={isOpen} onClose={onClose} size="7xl">
-        <Modal.Header>Thêm bài tập</Modal.Header>
+        <Modal.Header>Thêm tài liệu </Modal.Header>
         <Modal.Body>
           <div className="flex h-12 items-stretch justify-start gap-4">
             <TextInput

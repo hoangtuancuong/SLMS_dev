@@ -211,7 +211,7 @@ const CourseDetails = ({ courseId }) => {
         show={showAddAssignmentModal}
         onClose={() => setShowAddAssignmentModal(false)}
       >
-        <Modal.Header>Thêm bài tập mới</Modal.Header>
+        <Modal.Header>Thêm tài liệu  mới</Modal.Header>
         <Modal.Body>
           <Label>Tiêu đề bài tập</Label>
           <TextInput

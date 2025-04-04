@@ -360,7 +360,7 @@ const UpdateForm = ({ id }) => {
       </Accordion>
       <div className="col-span-12 flex gap-3 mt-4">
         <Button color="primary" type="submit">
-          Tạo người dùng
+          Cập nhật thông tin 
         </Button>
         <Button color="gray" type="button" onClick={resetForm}>
           Xoá form

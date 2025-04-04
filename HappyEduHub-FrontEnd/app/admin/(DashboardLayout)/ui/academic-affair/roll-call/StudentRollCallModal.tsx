@@ -45,7 +45,7 @@ const StudentRollCallModal = ({
           </button>
         </div>
 
-        <div className="mt-4 overflow-x-auto">
+        <div className="mt-4 overflow-x-auto  max-h-[60vh]">
           <Table hoverable>
             <Table.Head className="bg-blue-500 text-white">
               <Table.HeadCell>#</Table.HeadCell>
