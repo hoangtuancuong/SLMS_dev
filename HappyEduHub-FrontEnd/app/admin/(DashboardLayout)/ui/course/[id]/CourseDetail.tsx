@@ -101,7 +101,7 @@ const CourseDetail = (props: any) => {
       title: 'Danh sách buổi học',
       icon: <EventIcon fontSize="small" />,
       component: <CourseLesson course={course} />,
-      role: [RoleType.ADMIN, RoleType.ACADEMIC_AFFAIR],
+      role: [RoleType.ADMIN, RoleType.ACADEMIC_AFFAIR, RoleType.STUDENT],
     },
     {
       key: 'statitisc',

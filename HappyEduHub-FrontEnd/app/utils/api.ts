@@ -1,7 +1,7 @@
 import { Course, Member } from './api_model';
 import { PaginationResponse } from './api_response';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://9550-113-22-156-245.ngrok-free.app';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
 
 export const APIS = {
   getCourses: async (params: {
