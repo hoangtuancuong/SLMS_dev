@@ -31,6 +31,8 @@ export const getRole = (user) => {
       return RoleType.KETOAN;
     case 'TROGIANG':
       return RoleType.TROGIANG;
+    case 'STUDENTVIP':
+      return RoleType.STUDENTVIP;
     default:
       return RoleType.NULL;
   }
@@ -53,6 +55,8 @@ export const getCurrentUserRole = () => {
       return RoleType.KETOAN;
     case 'TROGIANG':
       return RoleType.TROGIANG;
+    case 'STUDENTVIP':
+      return RoleType.STUDENTVIP;
     default:
       return RoleType.NULL;
   }

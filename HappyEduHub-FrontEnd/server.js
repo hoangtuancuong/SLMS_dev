@@ -6,7 +6,7 @@ import path from 'path';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env') });
 
-const dev = process.env.NODE_ENV !== 'production';
+const dev = false;
 const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 const app = next({ dev });
 const handle = app.getRequestHandler();

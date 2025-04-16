@@ -322,4 +322,5 @@ courseLessonRouter.get("/lessons/today", authMiddleware, roleMiddleware([ROLE.AD
  */
 courseLessonRouter.post("/lessons/my-schedule", authMiddleware, courseLessonController.getMySchedule);
 
+
 export default courseLessonRouter;

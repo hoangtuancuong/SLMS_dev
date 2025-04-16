@@ -3,11 +3,13 @@ import {
   Grade,
   gradeBadgeColors,
   RoleType,
+  roomData,
   shiftDay,
   shiftName,
   statusBadge,
   Subject,
   subjectBadgeColors,
+  timeSlotMap,
 } from '@/app/utils/constant';
 import { Skeleton, Tooltip } from '@mui/material';
 import {
@@ -62,7 +64,7 @@ const Lessons = (props: any) => {
     });
   };
 
-  const handleRemoveRollCall = async (selectedRollcall) => {
+  const handleModifyRollCall = async (selectedRollcall, status) => {
     setIsStudentModalOpen(false);
     setLoading(true);
     selectedRollcall.map(async (student_id, index) => {
@@ -71,12 +73,12 @@ const Lessons = (props: any) => {
           (student) => student.id == student_id
         );
         const body = {
-          status: 'LATE',
+          status: status,
           note: '',
         };
         const response = await callApi(`rollcall/${student_id}`, 'PUT', body);
         notify(
-          `Xóa điểm danh thành công`,
+          `Đánh dấu muộn thành công`,
           'success'
         );
         setLoading(false);
@@ -106,7 +108,7 @@ const Lessons = (props: any) => {
       if (mode == 0) {
         setStudents(response.data);
       } else {
-        setRollCall(response.filter((rollcall) => rollcall.status != "LATE"))
+        setRollCall(response)
       }
     } catch (error) {
       notify('Có lỗi xảy ra', 'error');
@@ -188,7 +190,7 @@ const Lessons = (props: any) => {
 
           <div className="mt-2">
             <p className="text-xl font-semibold my-2 text-blue-500">
-              {item.course.code} - {item.course.name}
+              {item?.course?.code} - {item?.course?.name}
             </p>
             <div className="flex flex-wrap gap-2 text-gray-400 text-sm">
               <svg
@@ -212,8 +214,8 @@ const Lessons = (props: any) => {
                 />
               </svg>
               <div className="flex flex-wrap gap-1">
-                <Badge color="pink">{item.room}</Badge>
-                <Badge color="indigo">Cơ sở 1</Badge>
+                <Badge color="blue">{`Tầng ${roomData[item.room]?.floor}`} {`- Phòng ${roomData[item.room]?.room}`}</Badge>
+                <Badge color="indigo">Cơ sở {roomData[item.room]?.campus}</Badge>
               </div>
             </div>
             <div className="flex flex-wrap gap-2 text-gray-400 text-sm my-3">
@@ -233,7 +235,7 @@ const Lessons = (props: any) => {
               </svg>
               <div className="flex flex-wrap gap-1">
                 <Badge color="purple">{shiftDay[item.day]}</Badge>
-                <Badge color="pink">Ca {item.shift}</Badge>
+                <Badge color="pink">{timeSlotMap[item.shift]}</Badge>
               </div>
             </div>
             <div className="border-t-2"></div>
@@ -243,7 +245,7 @@ const Lessons = (props: any) => {
                 <p className="font-semibold text-base mb-2 text-blue-500">
                   Người dạy
                 </p>
-                {item.course?.members[0]?.name}
+                {item?.course?.members[0]?.name}
               </div>
               <div className="my-2">
                 <p className="font-semibold text-base mb-2 text-blue-500 text-end">
@@ -274,7 +276,7 @@ const Lessons = (props: any) => {
         onClose={handleStudentModalClose}
         isOpen={isStudentModalOpen && mode == 1}
         studentData={rollcall}
-        onConfirm={handleRemoveRollCall}
+        onConfirm={handleModifyRollCall}
         mode={mode}
       ></StudentRollCallModal>
     </>

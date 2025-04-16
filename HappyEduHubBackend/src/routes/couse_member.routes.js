@@ -324,6 +324,14 @@ courseMemberRoutes.delete(
 	courseMemberController.delete
 );
 
+courseMemberRoutes.get(
+	"/courses/:id/check-enroll",
+	authMiddleware,
+	roleMiddleware([ROLE.STUDENT]),
+	courseMemberController.checkEnroll
+);
+
+
 courseMemberRoutes.post("/members/:id/bulk-delete", authMiddleware, roleMiddleware([ROLE.ADMIN, ROLE.ACADEMIC_AFFAIR, ROLE.TEACHER]), courseMemberController.bulkDelete);
 
 // TODO: API trả về file excel danh sách member

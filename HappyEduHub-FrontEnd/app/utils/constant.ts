@@ -22,6 +22,7 @@ export const enum RoleType {
   ADMIN = 'Admin tổng',
   KETOAN = 'Kế toán',
   TROGIANG = 'Trợ giảng',
+  STUDENTVIP = 'Học sinh - VIP',
   NULL = 'Không rõ',
 }
 

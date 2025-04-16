@@ -9,6 +9,32 @@ import { MEMBER_STATUS, ROLE } from "../utils/const.js";
 import { catchValidationError, YUP_UTILS } from "../utils/utils.js";
 
 const memberController = {
+	checkEnroll: async (req, res, next) => {
+		const idSchema = YUP_UTILS.number("id").required("Cần phải có `id`.");
+		try {
+			req.params.id = await idSchema.validate(req.params.id);
+		} catch (err) {
+			return catchValidationError(next, err);
+		}
+
+		const transaction = await connection.transaction();
+		try {
+			const member = await courseMemberDto.findByCourseIdAndUserId(
+				{ course_id: req.params.id, user_id: req.userId },
+				transaction
+			);
+			if (member) {
+				await transaction.rollback();
+				return next(new BadRequestError("Bạn đã đăng ký khóa học này."));
+			}
+			await transaction.commit();
+			res.status(200).json({ message: "Bạn chưa đăng ký khóa học này." });
+		} catch (error) {
+			await transaction.rollback();
+			return next(error);
+		}
+	},
+	
 	enroll: async (req, res, next) => {
 		const idSchema = YUP_UTILS.number("id").required("Cần phải có `id`.");
 		try {

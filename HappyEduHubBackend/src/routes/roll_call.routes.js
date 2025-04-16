@@ -68,7 +68,7 @@ const rollCallRoutes = Router();
 rollCallRoutes.get(
 	"/rollcall/lesson/:id",
 	authMiddleware,
-	roleMiddleware([ROLE.ADMIN, ROLE.ACADEMIC_AFFAIR, ROLE.TEACHER]),
+	roleMiddleware([ROLE.ADMIN, ROLE.ACADEMIC_AFFAIR, ROLE.TEACHER, ROLE.STUDENT]),
 	rollCallController.getByLessonId
 );
 
@@ -164,7 +164,7 @@ rollCallRoutes.get(
 rollCallRoutes.get(
 	"/rollcall/course/:id",
 	authMiddleware,
-	roleMiddleware([ROLE.ADMIN, ROLE.ACADEMIC_AFFAIR, ROLE.TEACHER]),
+	roleMiddleware([ROLE.ADMIN, ROLE.ACADEMIC_AFFAIR, ROLE.TEACHER, ROLE.STUDENT]),
 	rollCallController.getByCourseId
 );
 

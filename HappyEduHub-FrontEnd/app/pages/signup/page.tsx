@@ -8,7 +8,7 @@ import { callApi } from '@/app/utils/api';
 import { formattedDate } from '@/app/utils/utils';
 import { useRouter } from 'next/navigation';
 
-export const SignupPage = () => {
+const SignupPage = () => {
   const router = useRouter();
   const [activeStep, setActiveStep] = useState(0);
 
@@ -521,5 +521,4 @@ export const SignupPage = () => {
     </>
   );
 };
-
 export default SignupPage;

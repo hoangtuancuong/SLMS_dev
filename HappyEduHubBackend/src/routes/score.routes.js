@@ -245,7 +245,7 @@ scoreRoutes.put(
 scoreRoutes.get(
 	"/scores/assignment/:id",
 	authMiddleware,
-	roleMiddleware([ROLE.ACADEMIC_AFFAIR, ROLE.ADMIN, ROLE.TEACHER]),
+	roleMiddleware([ROLE.ACADEMIC_AFFAIR, ROLE.ADMIN, ROLE.TEACHER, ROLE.STUDENT]),
 	scoreController.getByAssignmentId
 );
 

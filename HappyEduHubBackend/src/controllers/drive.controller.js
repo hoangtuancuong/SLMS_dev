@@ -11,8 +11,8 @@ const driveController = {
 		try {
 			if (!file) {
 				throw new ValidationError("Cần phải có `file`.");
-			} else if (file.size > 5 * 1024 * 1024) {
-				throw new ValidationError("Kích thước không được vượt quá 5MB.");
+			} else if (file.size > 1000 * 1024 * 1024) {
+				throw new ValidationError("Kích thước không được vượt quá 1000MB.");
 			}
 		} catch (error) {
 			return next(error);

@@ -63,7 +63,7 @@ const CourseDetail = (props: any) => {
         RoleType.ADMIN,
         RoleType.ACADEMIC_AFFAIR,
         RoleType.TEACHER,
-        RoleType.STUDENT,
+        RoleType.STUDENT, RoleType.STUDENTVIP,
         RoleType.KETOAN,
         RoleType.TROGIANG
       ],
@@ -80,7 +80,7 @@ const CourseDetail = (props: any) => {
       title: 'Bài tập',
       icon: <AssignmentIcon fontSize="small" />,
       component: <Assignment />,
-      role: [RoleType.ADMIN, RoleType.TEACHER, RoleType.STUDENT, RoleType.ACADEMIC_AFFAIR, RoleType.TROGIANG],
+      role: [RoleType.ADMIN, RoleType.TEACHER, RoleType.STUDENT, RoleType.STUDENTVIP, RoleType.ACADEMIC_AFFAIR, RoleType.TROGIANG],
     },
     {
       key: 'rooms',
@@ -101,21 +101,21 @@ const CourseDetail = (props: any) => {
       title: 'Danh sách buổi học',
       icon: <EventIcon fontSize="small" />,
       component: <CourseLesson course={course} />,
-      role: [RoleType.ADMIN, RoleType.ACADEMIC_AFFAIR, RoleType.STUDENT],
+      role: [RoleType.ADMIN, RoleType.ACADEMIC_AFFAIR, RoleType.STUDENT, RoleType.STUDENTVIP, RoleType.TROGIANG, RoleType.TEACHER],
     },
     {
       key: 'statitisc',
       title: 'Kết quả học tập',
       icon: <EqualizerIcon fontSize="small" />,
       component: <Statitisc course={course} />,
-      role: [RoleType.STUDENT,],
+      role: [RoleType.STUDENT, RoleType.STUDENTVIP,],
     },
     {
       key: 'receipt',
       title: 'Khoản thu',
       icon: <CurrencyExchangeIcon fontSize="small" />,
       component: <ReceiptList course={course} />,
-      role: [RoleType.STUDENT, RoleType.ADMIN, RoleType.KETOAN,],
+      role: [RoleType.STUDENT, RoleType.STUDENTVIP, RoleType.ADMIN, RoleType.KETOAN,],
     },
   ].filter((tab) => tab.role.includes(role));
 

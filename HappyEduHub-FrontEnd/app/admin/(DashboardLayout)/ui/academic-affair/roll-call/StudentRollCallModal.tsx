@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Table } from 'flowbite-react';
+import { Badge, Table } from 'flowbite-react';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const StudentRollCallModal = ({
@@ -14,14 +14,17 @@ const StudentRollCallModal = ({
   if (!isOpen) return null;
 
   const toggleSelectAll = () => {
+    console.log(selectedStudents)
+
     if (selectedStudents.length === studentData.length) {
       setSelectedStudents([]);
     } else {
-      setSelectedStudents(studentData.map((student) => student.user.id));
+      setSelectedStudents(studentData.map((student) => student.id));
     }
   };
 
   const toggleSelectStudent = (id) => {
+    console.log(selectedStudents)
     setSelectedStudents((prev) =>
       prev.includes(id)
         ? prev.filter((selectedId) => selectedId !== id)
@@ -30,7 +33,7 @@ const StudentRollCallModal = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50  max-h-60vh">
       <div className="relative w-full max-w-5xl p-6 bg-white rounded-lg shadow-lg">
         <div className="flex justify-between pb-4 border-b border-gray-300">
           <h3 className="text-2xl font-bold">
@@ -45,12 +48,13 @@ const StudentRollCallModal = ({
           </button>
         </div>
 
-        <div className="mt-4 overflow-x-auto  max-h-[60vh]">
+        <div className="mt-4 overflow-x-auto max-h-[60vh]">
           <Table hoverable>
             <Table.Head className="bg-blue-500 text-white">
               <Table.HeadCell>#</Table.HeadCell>
               <Table.HeadCell>Mã học sinh</Table.HeadCell>
               <Table.HeadCell>Tên học sinh</Table.HeadCell>
+              <Table.HeadCell>Trạng thái</Table.HeadCell>
             </Table.Head>
             <Table.Body className="divide-y divide-gray-200">
               {studentData?.map((student, index) => (
@@ -66,6 +70,17 @@ const StudentRollCallModal = ({
                   <Table.Cell>{student.user.name}
                     {selectedStudents.includes(student.id) && (
                       <CheckCircleIcon className="w-5 h-5 text-green-500" />
+                    )}
+                  </Table.Cell>
+                  <Table.Cell>
+                    {student.status=="ABSENT" && (
+                      <Badge color='failure'>Vắng mặt</Badge>
+                    )}
+                    {student.status=="LATE" && (
+                      <Badge color='warning'>Tới muộn</Badge>
+                    )}
+                    {student.status=="PERMITTED_ABSENT" && (
+                      <Badge color='primary'>Có phép</Badge>
                     )}
                   </Table.Cell>
                 </Table.Row>
@@ -88,11 +103,18 @@ const StudentRollCallModal = ({
             Chọn hết
           </button>
           <button
-            onClick={() => onConfirm(selectedStudents)}
+            onClick={() => onConfirm(selectedStudents, "LATE")}
+            className="px-6 py-2 text-white bg-orange-500 rounded-lg hover:bg-orange-700 transition"
+            disabled={selectedStudents.length === 0}
+          >
+            {mode == 1 && `Đánh dấu muộn (${selectedStudents.length})`}
+          </button>
+          <button
+            onClick={() => onConfirm(selectedStudents, "PERMITTED_ABSENT")}
             className="px-6 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-700 transition"
             disabled={selectedStudents.length === 0}
           >
-            {mode == 1 && `Xóa điểm danh (${selectedStudents.length})`}
+            {mode == 1 && `Đánh dấu có phép (${selectedStudents.length})`}
           </button>
         </div>
       </div>

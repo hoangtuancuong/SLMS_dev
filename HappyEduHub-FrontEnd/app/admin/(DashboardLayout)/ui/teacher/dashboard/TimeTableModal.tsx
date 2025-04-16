@@ -36,7 +36,6 @@ const TimeTableModal = ({ open, setClose }) => {
           };
         });
       });
-
       setTimeTableData(formattedData);
     } catch (error) {
       console.log(error);

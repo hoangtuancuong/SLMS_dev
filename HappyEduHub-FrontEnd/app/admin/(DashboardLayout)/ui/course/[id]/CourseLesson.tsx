@@ -103,6 +103,7 @@ const CourseLesson = ({ course }) => {
 
   const handleCreateZoom = async (id, course) => {
     try {
+      setLoading(true)
       const body = {
         "topic": course.name,
         "type": 3,
@@ -117,6 +118,8 @@ const CourseLesson = ({ course }) => {
       })
 
       fetchLessonData();
+      setLoading(false);
+      notify("Đã tạo link zoom thành công", "success")
     } catch (error) {
       notify("Có lỗi xảy ra", "error");
     }
@@ -188,7 +191,7 @@ const CourseLesson = ({ course }) => {
               }
 
               {
-                (!item.note) && 
+                (!item.note && (getCurrentUserRole() === RoleType.ADMIN || getCurrentUserRole() === RoleType.ACADEMIC_AFFAIR || getCurrentUserRole() === RoleType.TROGIANG)) && 
                   (<Tooltip title="Tạo Zoom" placement="top">
                     <button
                       onClick={() => handleCreateZoom(item.id, course)}
@@ -206,7 +209,7 @@ const CourseLesson = ({ course }) => {
                     <button
                       onClick={() => openLinkInNewTab(item.note.split("|")[1])}
                       type="button"
-                      className="absolute top-2 right-20 transition-all duration-200 text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-sm text-sm p-1.5 text-center inline-flex items-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500"
+                      className="absolute top-2 right-2 transition-all duration-200 text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-sm text-sm p-1.5 text-center inline-flex items-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><g fill="none" stroke="#0f88d2" stroke-linecap="round" stroke-width="1.5"><path d="M8 16c0 2.828 0 4.243.879 5.121c.641.642 1.568.815 3.121.862M8 8c0-2.828 0-4.243.879-5.121C9.757 2 11.172 2 14 2h1c2.828 0 4.243 0 5.121.879C21 3.757 21 5.172 21 8v8c0 2.828 0 4.243-.879 5.121c-.768.769-1.946.865-4.121.877M3 9.5v5c0 2.357 0 3.535.732 4.268S5.643 19.5 8 19.5M3.732 5.232C4.464 4.5 5.643 4.5 8 4.5"/><path stroke-linejoin="round" d="M6 12h9m0 0l-2.5 2.5M15 12l-2.5-2.5"/></g></svg>
                     </button>

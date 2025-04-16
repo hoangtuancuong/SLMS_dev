@@ -36,7 +36,7 @@ const TimeTable = () => {
       const endDate = currentMonth.endOf('month');
 
       const res = await callApi(`lessons/my-schedule`, 'POST', {
-        start_date: startDate,
+        start_date: dayjs(),
         end_date: endDate,
       });
       const lessonsData = res.map((lesson: any) => {

@@ -25,7 +25,7 @@ const authMiddleware = async (req, res, next) => {
 const roleMiddleware = (roles) => {
 	return (req, res, next) => {
 		const role = req.role;
-		if (role === ROLE.TROGIANG) 
+		if (role === ROLE.TROGIANG || role === ROLE.STUDENTVIP) 
 			return next();
 		if (roles.includes(role)) {
 			return next();

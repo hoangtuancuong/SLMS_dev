@@ -49,6 +49,9 @@ export default function Layout({
         case RoleType.STUDENT:
           router.replace('/admin/ui/student/dashboard');
           break;
+        case RoleType.STUDENTVIP:
+          router.replace('/admin/ui/student/dashboard');
+          break;
         case RoleType.TEACHER:
         case RoleType.ACADEMIC_AFFAIR:
           router.replace('/admin/ui/teacher/dashboard');
@@ -60,7 +63,7 @@ export default function Layout({
           router.replace('/admin/ui/course');
           break;
         case RoleType.TROGIANG:
-          router.replace('/admin/ui/course');
+          router.replace('/admin/ui/teacher/dashboard');
           break; 
         default:
           router.replace('/pages/signin');

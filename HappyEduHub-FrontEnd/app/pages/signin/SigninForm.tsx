@@ -24,12 +24,17 @@ export default function SigninForm() {
 
   useEffect(() => {
     if (isRedirecting) return;
+    if (typeof window === "undefined" || isRedirecting) return;
+
 
     const role = getCurrentUserRole();
 
     setIsRedirecting(true);
     switch (role) {
       case RoleType.STUDENT:
+        router.replace('/admin/ui/student/dashboard');
+        break;
+      case RoleType.STUDENTVIP:
         router.replace('/admin/ui/student/dashboard');
         break;
       case RoleType.TEACHER:
@@ -61,8 +66,10 @@ export default function SigninForm() {
           })
         );
 
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('user', JSON.stringify(data.data));
+        if (typeof window !== "undefined") {
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("user", JSON.stringify(data.data));
+        }
 
         router.push('/admin');
       } else {
@@ -76,7 +83,15 @@ export default function SigninForm() {
     }
   };
 
-  const user = getUserData();
+  const user = typeof window !== "undefined" ? getUserData() : null;
+
+  if (user) {
+    return (
+      <div className="flex justify-center items-center min-h-[200px]">
+        <Spinner size="xl" />
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -128,9 +143,6 @@ export default function SigninForm() {
       <div className="mb-6">
         <button className="shadow-submit dark:shadow-submit-dark flex w-full items-center justify-center rounded-sm bg-primary px-9 py-4 text-base font-medium text-white duration-300 hover:bg-primary/90">
           Đăng nhập
-          {
-            ((user)?(<Spinner></Spinner>):(""))
-          }
         </button>
       </div>
     </form>
